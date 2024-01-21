@@ -5,17 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/userSlice";
+import { useRouter } from "next/router";
 
 export default function SignUpModal() {
   const isOpen = useSelector((state) => state.modals.signupModalOpen);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   async function handleSignUp() {
     const userCredentials = await createUserWithEmailAndPassword(
@@ -23,6 +28,13 @@ export default function SignUpModal() {
       email,
       password
     );
+
+    await updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: `./assets/profilePictures/pfp${Math.ceil(Math.random() * 6)}.png`
+    })
+
+    router.reload()
   }
 
   useEffect(() => {
@@ -33,10 +45,10 @@ export default function SignUpModal() {
       dispatch(
         setUser({
           username: currentUser.email.split("@")[0],
-          name: null,
+          name: currentUser.displayName,
           email: currentUser.email,
           uid: currentUser.uid,
-          photoUrl: null,
+          photoUrl: currentUser.photoURL,
         })
       );
     });
@@ -69,6 +81,7 @@ export default function SignUpModal() {
               placeholder="Full Name"
               className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
               type="text"
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               placeholder="Email"

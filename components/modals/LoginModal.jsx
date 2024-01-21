@@ -28,12 +28,12 @@ export default function LoginModal() {
             <input
               placeholder="Email"
               className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
-              type="password"
+              type="email"
             />
             <input
               placeholder="Password"
               className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
-              type="text"
+              type="password"
             />
             <button className="bg-white text-black w-full font-bold text-lg p-2 my-8 rounded-md">
               Sign In
