@@ -1,5 +1,6 @@
 import React from "react";
 import SignUpModal from "./modals/SignUpModal";
+import LoginModal from "./modals/LoginModal";
 
 export default function BottomBanner() {
   return (
@@ -12,9 +13,8 @@ export default function BottomBanner() {
       </div>
 
       <div className="space-x-3">
-        <button className="bg-transparent border border-white text-white w-[160px] rounded-full h-[40px] hover:bg-[#cbd2d7] hover:bg-opacity-20">
-          Log In
-        </button>
+        <LoginModal />
+
         <SignUpModal />
       </div>
     </div>
