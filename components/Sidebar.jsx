@@ -1,5 +1,6 @@
 "use client";
 import { auth } from "@/firebase";
+import { closeLoginModal, closeSignupModal } from "@/redux/modalSlice";
 import { signOutUser } from "@/redux/userSlice";
 import {
   HomeIcon,
@@ -19,11 +20,13 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Sidebar() {
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
 
   async function handleSignOut() {
     await signOut(auth);
     dispatch(signOutUser());
+    dispatch(closeSignupModal());
+    dispatch(closeLoginModal());
   }
 
   return (

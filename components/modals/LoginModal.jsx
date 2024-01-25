@@ -1,12 +1,25 @@
 "use client";
+import { auth } from "@/firebase";
 import { closeLoginModal, openLoginModal } from "@/redux/modalSlice";
 import { Modal } from "@mui/material";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginModal() {
   const isOpen = useSelector((state) => state.modals.loginModalOpen);
   const dispatch = useDispatch();
-  console.log(isOpen);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSignIn() {
+    await signInWithEmailAndPassword(auth, email, password);
+  }
+
+  async function handleGuestSignIn() {
+    await signInWithEmailAndPassword(auth, "guest1616@gmail.com", "123456");
+  }
 
   return (
     <>
@@ -29,17 +42,25 @@ export default function LoginModal() {
               placeholder="Email"
               className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               placeholder="Password"
               className="h-10 mt-8 rounded-md bg-transparent border border-gray-700 p-6"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="bg-white text-black w-full font-bold text-lg p-2 my-8 rounded-md">
+            <button
+              onClick={handleSignIn}
+              className="bg-white text-black w-full font-bold text-lg p-2 my-8 rounded-md"
+            >
               Sign In
             </button>
             <h1 className="text-center font-bold text-lg">Or</h1>
-            <button className="bg-white text-black w-full font-bold text-lg p-2 mt-8 rounded-md">
+            <button
+              onClick={handleGuestSignIn}
+              className="bg-white text-black w-full font-bold text-lg p-2 mt-8 rounded-md"
+            >
               Sign In as Guest
             </button>
           </div>

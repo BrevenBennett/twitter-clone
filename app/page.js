@@ -2,6 +2,7 @@ import BottomBanner from "@/components/BottomBanner";
 import PostFeed from "@/components/PostFeed";
 import Sidebar from "@/components/Sidebar";
 import Trending from "@/components/Trending";
+import CommentModal from "@/components/modals/CommentModal";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <PostFeed />
         <Trending />
       </div>
+      <CommentModal />
       <BottomBanner />
     </div>
   );

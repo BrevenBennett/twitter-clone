@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/userSlice";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function SignUpModal() {
   const isOpen = useSelector((state) => state.modals.signupModalOpen);
@@ -31,10 +32,16 @@ export default function SignUpModal() {
 
     await updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: `./assets/profilePictures/pfp${Math.ceil(Math.random() * 6)}.png`
-    })
+      photoURL: `./assets/profilePictures/pfp${Math.ceil(
+        Math.random() * 6
+      )}.png`,
+    });
 
-    router.reload()
+    router.refresh;
+  }
+
+  async function handleGuestSignIn() {
+    await signInWithEmailAndPassword(auth, "guest1616@gmail.com", "123456");
   }
 
   useEffect(() => {
@@ -72,7 +79,7 @@ export default function SignUpModal() {
       >
         <div className="w-[90%] h-[600px] bg-black text-white md:w-[560px] md:h-[600px] border border-gray-700 rounded-lg flex justify-center">
           <div className="w-[90%] mt-8 flex flex-col">
-            <button className="bg-white text-black w-full font-bold text-lg p-2 rounded-md">
+            <button onClick={handleGuestSignIn} className="bg-white text-black w-full font-bold text-lg p-2 rounded-md">
               Sign In as Guest
             </button>
             <h1 className="text-center mt-4 font-bold text-lg">Or</h1>
