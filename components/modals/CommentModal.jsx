@@ -58,7 +58,7 @@ export default function CommentModal() {
               <img
                 className="w-12 h-12 object-cover rounded-full"
                 src={tweetDetails.photoUrl}
-                alt=""
+                alt="pic"
               />
               <div>
                 <div className="flex space-x-1.5">
@@ -81,7 +81,7 @@ export default function CommentModal() {
               <img
                 className="w-12 h-12 object-cover rounded-full"
                 src={userImg}
-                alt=""
+                alt="pic"
               />
               <div className="w-full">
                 <textarea

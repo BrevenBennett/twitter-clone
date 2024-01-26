@@ -48,7 +48,7 @@ export default function Tweet({ data, id }) {
 export function TweetHeader({ username, name, timestamp, text, photoUrl }) {
   return (
     <div className="flex space-x-3 p-3 border-gray-700">
-      <img className="w-11 h-11 rounded-full object-cover" src={photoUrl} />
+      <img className="w-11 h-11 rounded-full object-cover" src={photoUrl} alt="pic" />
       <div>
         <div className="text-gray-500 flex items-center space-x-2 mb-1">
           <h1 className="text-white font-bold">{name}</h1>
